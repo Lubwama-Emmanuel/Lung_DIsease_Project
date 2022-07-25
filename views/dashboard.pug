@@ -1,0 +1,24 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  link(rel='stylesheet' href='/public/css/home.css')
+  link(href='https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap' rel='stylesheet')
+  title Dashboard
+nav.topnav
+  a.active(href='#home') Dashboard
+  a(href='#news') Help
+  a(href='#about') About
+section
+  .topdiv
+    h1.welcome Welcome, Mr FirstName
+    p Here are the few steps to follow
+    ul.steps
+      li Make sure to follow step 1
+      li Make sure to follow step 2
+      li Make sure to follow step 3
+    p Click on the &quot;Choose File&quot; button to upload a file:
+    form(action='/action_page.php')
+      input#myFile(type='file' name='filename')
+      input(type='submit')

@@ -1,0 +1,29 @@
+doctype html
+head
+  title Sign Up 
+  link(rel='stylesheet' href='css/sign.css')
+  link(href='https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap' rel='stylesheet')
+.signup-box
+  h1 Sign Up
+  h4 It&apos;s free and only takes a minute
+  form
+    label First Name
+    input(type='text' placeholder='')
+    label Last Name
+    input(type='text' placeholder='')
+    label Email
+    input(type='email' placeholder='')
+    label Password
+    input(type='password' placeholder='')
+    label Confirm Password
+    input(type='password' placeholder='')
+    input(type='button' value='Submit')
+  p
+    | By clicking the Sign Up button,you agree to our 
+    br
+    a(href='#') Terms and Condition
+    |  and 
+    a(href='#') Policy Privacy
+p.para-2
+  | Already have an account? 
+  a(href='/logIn') Login here

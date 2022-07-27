@@ -1,48 +1,29 @@
-// const logIn = async (email, password) => {
-//   console.log(email, password);
-//   try {
-//     console.log('inside try')
-
-//     // const res = await fetch({
-
-//     //   url: "http://127.0.0.1:8080/api/v1/fyp/logIn",
-//     //   data: {
-//     //     email,
-//     //     password,
-//     //   },
-//     // });
-//     const res =  await fetch("http://localhost:8080/api/v1/fyp/logIn",{
-//       method:"POST",
-//       body:JSON.stringify({
-//             email,
-//         password,
-//       }),
-//       headers:{
-//         "Content-type":"application/json"
-//       }
-//     })
-//     console.log(res);
-//   } catch (err) {
-//     console.log('an error occured',err)
-
-//     // console.log(err.response.data);
-//   }
-// };
 
 const logIn = async (email, password) => {
   console.log(email, password);
   try {
     const res = await axios({
-      method: "POST",
+      method: 'POST',
       url: "http://127.0.0.1:8080/api/v1/fyp/logIn",
       data: {
         email,
-        password,
-      },
-    });
-    console.log('Response from Axios',res);
+        password
+      }
+    })
+    // const res = await fetch("http://127.0.0.1:8080/api/v1/fyp/logIn", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     email,
+    //     password,
+    //   }),
+    // });
+    console.log('Am inside the try')
+    console.log("Response from fetch", res);
   } catch (err) {
-    console.log('Error from axios', err);
+    console.log("An Error from Fetch", err);
   }
 };
 document.querySelector(".logInForm").addEventListener("submit", (e) => {

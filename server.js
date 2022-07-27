@@ -11,6 +11,6 @@ const DB = process.env.DATABASE_URL.replace(
 mongoose
   .connect(DB)
   .then((con) => console.log("DATABASE CONNECTED SUCCESSFULLY"))
-  .catch((err) => console.log("OOOOOOPs DATABASE NOT CONNECTED"));
+  .catch((err) => console.log("OOOOOOPs DATABASE NOT CONNECTED", err));
 
 app.listen(port, () => console.log(`APP LISTENING TO PORT: ${port}`));

@@ -8,3 +8,8 @@ exports.signUp = (req, res) => {
     title: "Sign Up Here",
   });
 };
+exports.home = (req, res) => {
+  res.render("/", {
+    title: "Home",
+  });
+};

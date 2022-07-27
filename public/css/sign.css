@@ -47,6 +47,15 @@ body {
     border-radius: 6px;
     outline: none;
   }
+  .btn {
+    width: 320px;
+    height: 35px;
+    margin-top: 20px;
+    border: none;
+    background-color: #49c1a2;
+    color: white;
+    font-size: 18px;
+  }
   input[type="button"] {
     width: 320px;
     height: 35px;

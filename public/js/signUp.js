@@ -7,23 +7,33 @@ const signUp = async (
 ) => {
   console.log(firstName, lastName, email, password, passwordConfirm);
   try {
-    const res = await fetch("http://localhost:8080/api/v1/fyp/signUp", {
+    const res = await axios({
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+      url: "http://localhost:8080/api/v1/fyp/signUp",
+      data: {
         firstName,
         lastName,
         email,
         password,
         passwordConfirm,
-      }),
+      },
     });
-const data =  await res.json()
-    console.log("Response from fetch", data);
+    // const res = await fetch("http://localhost:8080/api/v1/fyp/signUp", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     firstName,
+    //     lastName,
+    //     email,
+    //     password,
+    //     passwordConfirm,
+    //   }),
+    // });
+    console.log("Response from Axios", res);
   } catch (err) {
-    console.log("Error from fetch", err);
+    console.log("Error from Axios", err);
   }
 };
 

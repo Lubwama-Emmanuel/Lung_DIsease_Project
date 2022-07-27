@@ -21,9 +21,9 @@ const logIn = async (email, password) => {
     //   }),
     // });
     console.log('Am inside the try')
-    console.log("Response from fetch", res);
+    console.log("Response from Axios ", res);
   } catch (err) {
-    console.log("An Error from Fetch", err);
+    console.log("An Error from Axios ", err);
   }
 };
 document.querySelector(".logInForm").addEventListener("submit", (e) => {

@@ -9,7 +9,7 @@ exports.signUp = (req, res) => {
   });
 };
 exports.home = (req, res) => {
-  res.render("/", {
-    title: "Home",
+  res.render("dashboard", {
+    title: "Dashboard",
   });
 };

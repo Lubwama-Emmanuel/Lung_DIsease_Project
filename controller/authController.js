@@ -10,6 +10,21 @@ const signToken = (id) =>
   });
 const createSendToken = (user, statusCode, res) => {
   const token = signToken(user._id);
+
+  const cookieOptions = {
+    expires: new Date(
+      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+    ),
+    httpOnly: true,
+  };
+
+  if (process.env.NODE_ENV === "production") cookieOptions.secure = true;
+
+  res.cookie("jwt", token, cookieOptions);
+
+  // Remove password from output
+  user.password = undefined;
+
   res.status(statusCode).json({
     status: "success",
     token,
@@ -20,7 +35,7 @@ const createSendToken = (user, statusCode, res) => {
 };
 exports.signUp = catchAsync(async (req, res, next) => {
   if (!req.body) {
-    console.log('Failed')
+    console.log("Failed");
     return next(new AppError("Please provide body ", 400));
   }
   const newUser = await User.create({
@@ -38,22 +53,17 @@ exports.logIn = catchAsync(async (req, res, next) => {
   // 1) Check if user provided email and password
 
   if (!email || !password) {
-    console.log('We here 5')
     return next(new AppError("Please provide your Email and Password", 400));
   }
   // check if user exists
- 
+
   const user = await User.findOne({ email }).select("+password");
   const correct = await user.correctPassword(password, user.password);
 
   if (!user || !correct) {
     return next(new AppError("Incorrect email or password", 400));
   }
-  const token = signToken(user._id);
-  res.status(201).json({
-    status: "Success",
-    token,
-  });
+  createSendToken(user, 201, res);
 });
 
 exports.protect = catchAsync(async (req, res, next) => {
@@ -61,9 +71,11 @@ exports.protect = catchAsync(async (req, res, next) => {
   let token;
   if (
     req.headers.authorization &&
-    req.headers.authorization.startswith("Bearer")
+    req.headers.authorization.startsWith("Bearer")
   ) {
     token = await req.headers.authorization.split(" ")[1];
+  } else if (req.cookies.jwt) {
+    token = req.cookies.jwt;
   }
   if (!token) {
     return next(new AppError("You are Not Logged in", 400));

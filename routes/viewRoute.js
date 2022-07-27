@@ -4,6 +4,6 @@ const viewController = require('../controller/viewController')
 
 router.get('/logIn', viewController.logIn)
 router.get('/signUp', viewController.signUp)
-router.get('/', viewController.home)
+router.get('/dashboard', viewController.home)
 
 module.exports = router;

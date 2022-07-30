@@ -1,0 +1,21 @@
+doctype html
+head
+  title test
+  link(rel='stylesheet' href='/css/sign.css')
+  link(href='https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap' rel='stylesheet')
+.signup-box
+  h1 Sign Up
+  h4 It&apos;s free and only takes a minute
+  form.signUpForm 
+    label Email
+    input#email(type='email' placeholder='you@example.com')
+    label Password
+    input#password(type='password' placeholder='*********')
+    button.btn Submit 
+p.para-2
+  | Already have an account? 
+  a(href='/logIn') Login here
+
+
+  script(src = 'https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js')
+  script(src = '/js/test.js')

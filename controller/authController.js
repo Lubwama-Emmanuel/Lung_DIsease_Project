@@ -54,16 +54,17 @@ exports.logIn = catchAsync(async (req, res, next) => {
 
   if (!email || !password) {
     return next(new AppError("Please provide your Email and Password", 400));
+
   }
   // check if user exists
-
-  const user = await User.findOne({ email }).select("+password");
+  const user = await User.findOne({ email }).select('+password')
   const correct = await user.correctPassword(password, user.password);
-
+  
   if (!user || !correct) {
     return next(new AppError("Incorrect email or password", 400));
   }
-  createSendToken(user, 201, res);
+  const userResponse = await User.findOne({ email })
+  createSendToken(userResponse, 201, res);
 });
 
 exports.protect = catchAsync(async (req, res, next) => {
@@ -91,5 +92,27 @@ exports.protect = catchAsync(async (req, res, next) => {
   }
 
   req.user = currentUser;
+  next();
+});
+
+exports.isLoggedIn = catchAsync(async (req, res, next) => {
+  if (req.cookies.jwt) {
+    // 1) Verifying if token on the cookie is valid
+    const decoded = await promisify(jwt.verify)(
+      req.cookies.jwt,
+      process.env.JWT_SECRET
+    );
+
+    // 2) Check if user still exists
+    const currentUser = await User.findById(decoded.id);
+      console.log(currentUser)
+    if (!currentUser) {
+      return next();
+    }
+
+    // 3) Giving the templates access to the user details
+    res.locals.user = currentUser;
+    return next();
+  }
   next();
 });

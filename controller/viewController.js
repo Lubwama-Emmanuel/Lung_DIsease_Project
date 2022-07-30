@@ -13,3 +13,8 @@ exports.home = (req, res) => {
     title: "Dashboard",
   });
 };
+exports.test = (req, res) => {
+  res.render("test", {
+    title: "Test Login",
+  });
+};

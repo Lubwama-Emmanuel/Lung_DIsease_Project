@@ -1,29 +1,29 @@
-const logIn = async (email, password) => {
+const test = async (email, password) => {
   console.log(email, password);
   try {
     const res = await axios({
       method: "POST",
-      url: "http://127.0.0.1:8080/api/v1/fyp/logIn",
+      url: "http://localhost:8080/api/v1/fyp/logIn",
       data: {
         email,
         password,
       },
     });
     if (res.data.status === "success") {
-      alert("You logged in!");
-      window.setTimeout(() => {
+      alert("You now logged in!");
+      window.setInterval(() => {
         location.assign("dashboard");
       }, 1000);
     }
-    console.log("Response from Axios ", res);
+    console.log("Response from Axios", res);
   } catch (err) {
-    alert(err.response.data.message);
-    console.log("An Error from Axios ", err);
+    console.log("Error from Axios", err);
   }
 };
+
 document.querySelector(".logInForm").addEventListener("submit", (e) => {
   e.preventDefault();
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
-  logIn(email, password);
+  test(email, password);
 });

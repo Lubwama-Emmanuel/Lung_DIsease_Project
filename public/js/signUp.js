@@ -17,20 +17,13 @@ const signUp = async (
         password,
         passwordConfirm,
       },
-    });
-    // const res = await fetch("http://localhost:8080/api/v1/fyp/signUp", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     firstName,
-    //     lastName,
-    //     email,
-    //     password,
-    //     passwordConfirm,
-    //   }),
-    // });
+    })
+    if(res.data.status === 'success'){
+      alert('You now logged in!')
+      window.setInterval(() => {
+        location.assign('dashboard')
+      }, 1000)
+    }
     console.log("Response from Axios", res);
   } catch (err) {
     console.log("Error from Axios", err);
